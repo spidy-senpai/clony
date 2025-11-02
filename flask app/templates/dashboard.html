@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Dashboard-specific styles for sidebar, layout, and clone list */
+        body {
+            min-height: 100vh;
+            background: #181f2a;
+            color: #e5e7eb;
+            font-family: 'Poppins', sans-serif;
+        }
+        .sidebar {
+            width: 220px;
+            background: #232946;
+            color: #e5e7eb;
+            position: fixed;
+            top: 0; left: 0; bottom: 0;
+            padding: 2.5rem 1.2rem 1.2rem 1.2rem;
+            border-radius: 0 1.2rem 1.2rem 0;
+            box-shadow: 2px 0 16px #23294633;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .sidebar h2 {
+            color: #6366f1;
+            margin-bottom: 2.2rem;
+        }
+        .sidebar a {
+            color: #e5e7eb;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.8rem 1.2rem;
+            border-radius: 0.7rem;
+            margin-bottom: 0.5rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        .sidebar a:hover {
+            background: #6366f1;
+            color: #fff;
+        }
+        .main-content {
+            margin-left: 240px;
+            padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+            max-width: 1100px;
+        }
+        .profile-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2.2rem;
+        }
+        .profile-pic {
+            width: 70px; height: 70px;
+            border-radius: 50%;
+            background: #232946;
+            border: 2px solid #6366f1;
+            margin-right: 1.5rem;
+            overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .profile-pic img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .profile-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #6366f1;
+        }
+        .clone-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .clone-list-item {
+            display: flex;
+            align-items: center;
+            background: #232946;
+            border-radius: 1.1rem;
+            box-shadow: 0 2px 12px #23294644;
+            padding: 1.1rem 2rem;
+            cursor: pointer;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .clone-list-item:hover {
+            box-shadow: 0 8px 32px #6366f1aa;
+            transform: translateY(-2px) scale(1.01);
+        }
+        .clone-avatar {
+            width: 56px; height: 56px;
+            border-radius: 50%;
+            background: #6366f1;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; color: #fff;
+            margin-right: 1.5rem;
+            overflow: hidden;
+        }
+        .clone-avatar img {
+            width: 56px; height: 56px; object-fit: cover; border-radius: 50%;
+        }
+        .clone-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .clone-name {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+            color: #e5e7eb;
+        }
+        .clone-meta {
+            font-size: 0.95rem;
+            color: #a0aec0;
+        }
+        .create-clone-btn {
+            margin: 2.5rem auto 0 auto;
+            display: block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 0.7rem;
+            cursor: pointer;
+            box-shadow: 0 2px 8px #23294644;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .create-clone-btn:hover {
+            background: linear-gradient(135deg, #5a67d8, #6b46c1);
+            transform: scale(1.04);
+        }
+        @media (max-width: 900px) {
+            .main-content {
+                margin-left: 0;
+                padding: 1.2rem 0.5rem;
+            }
+            .sidebar {
+                width: 100vw;
+                border-radius: 0 0 1.2rem 1.2rem;
+                position: static;
+                box-shadow: none;
+                flex-direction: row;
+                gap: 0.5rem;
+                padding: 1.2rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hamburger for sidebar -->
+    <button class="hamburger" onclick="toggleSidebar()">
+        <span></span><span></span><span></span>
+    </button>
+    <!-- Sidebar navigation -->
+    <nav class="sidebar" id="sidebar">
+        <h2>Menu</h2>
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('settings') }}">Settings</a>
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="{{ url_for('theme') }}">Theme</a>
+    </nav>
+    <main class="main-content">
+        <div class="profile-section">
+            <div class="profile-pic">
+                {# Show user's profile picture if available, else blank or default #}
+                {% if profile_pic %}
+                    <img src="{{ url_for('static', filename=profile_pic.replace('users/', 'users/')) }}" alt="Profile Picture">
+                {% else %}
+                    <!-- Blank profile, user can set this later -->
+                {% endif %}
+            </div>
+            <div class="profile-name">{{ username|capitalize }}</div>
+        </div>
+        <h2 style="color:#a0aec0; margin-bottom:0.7rem;">Your Clones</h2>
+        <div class="clone-list">
+            {# Loop through user's clones and show as a vertical list #}
+            {% for clone in clones %}
+            <div class="clone-list-item" onclick="window.location.href='{{ url_for('chat_clone', clone_name=clone) }}'">
+                <div class="clone-avatar">
+                    {% if clone_pics and clone in clone_pics %}
+                        <img src="{{ url_for('static', filename=clone_pics[clone]) }}" alt="Clone Picture">
+                    {% else %}
+                        {{ clone[0]|upper }}
+                    {% endif %}
+                </div>
+                <div class="clone-info">
+                    <div class="clone-name">{{ clone|capitalize }}</div>
+                    <div class="clone-meta">AI Persona</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    <button class="create-clone-btn" onclick="window.location.href='{{ url_for('create_clone_view') }}'">+ Create Clone</button>
+    </main>
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+        // No placeholder navigation needed; sidebar links now work
+    </script>
+</body>
+</html>

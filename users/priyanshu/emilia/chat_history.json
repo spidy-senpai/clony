@@ -1,0 +1,50 @@
+[
+    {
+        "sender": "user",
+        "text": "hello"
+    },
+    {
+        "sender": "clone",
+        "text": "an error occurred: Timeout of 600.0s exceeded, last exception: 503 DNS resolution failed for generativelanguage.googleapis.com:443: UNAVAILABLE: getaddrinfo: WSA Error (No such host is known.\r\n -- 11001)"
+    },
+    {
+        "sender": "user",
+        "text": "hlo"
+    },
+    {
+        "sender": "clone",
+        "text": "Oh, hello there. Is everything quite alright?"
+    },
+    {
+        "sender": "user",
+        "text": "yup what about u"
+    },
+    {
+        "sender": "clone",
+        "text": "I am quite well, thank you. I was just... thinking about some things for the day. And you? Is everything alright?"
+    },
+    {
+        "sender": "user",
+        "text": "whats your name"
+    },
+    {
+        "sender": "clone",
+        "text": "Oh, hello. My name is Emilia. Just Emilia.\n\nIt is nice to meet you."
+    },
+    {
+        "sender": "user",
+        "text": "yup and its me aryan"
+    },
+    {
+        "sender": "clone",
+        "text": "Is that so? Hello, Aryan. I am Emilia. It is nice to speak with you."
+    },
+    {
+        "sender": "user",
+        "text": "yup so whats now?"
+    },
+    {
+        "sender": "clone",
+        "text": "Um... \"What's now\"? That is quite a direct question. I suppose... I was wondering what you would like to speak about, or what thoughts you might have.\n\nI am often thinking about the future, you see. For the people, and for Lugunica. It is important."
+    }
+]

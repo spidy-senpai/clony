@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body style="background: url('{{ url_for('static', filename=bg_file) }}') center center/cover no-repeat fixed;">
+    <!-- Soft Rain Sound Background -->
+    <audio id="rain-audio" autoplay loop volume="0.2">
+        <source src="{{ url_for('static', filename='rain.mp3') }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <script>
+        // Set rain audio volume lower for ambience
+        document.addEventListener('DOMContentLoaded', function() {
+            var rainAudio = document.getElementById('rain-audio');
+            if (rainAudio) rainAudio.volume = 0.15;
+        });
+    </script>
+    <div class="container">
+        <!-- Toggle Buttons -->
+        <div class="form-toggle">
+            <button id="show-signin" class="active">Sign In</button>
+            <button id="show-signup">Sign Up</button>
+        </div>
+
+        <!-- ================= SIGN IN FORM ================= -->
+        <form id="signin-form"
+              class="auth-form{% if form == 'signin' %} active{% else %} hidden{% endif %}"
+              action="{{ url_for('signin') }}"
+              method="POST">
+              
+            <h2>Sign In</h2>
+
+            <div class="input-group">
+                <label for="signin-username">Username</label>
+                <input type="text" id="signin-username" name="username" required>
+            </div>
+
+            <div class="input-group">
+                <label for="signin-password">Password</label>
+                <input type="password" id="signin-password" name="password" required>
+            </div>
+
+            <button type="submit" class="submit-btn">Login</button>
+                {% if form == 'signin' and message %}
+                    <p id="signin-message" class="message" style="color: red; font-weight: bold;">
+                        {{ message }}
+                    </p>
+                {% endif %}
+        </form>
+
+        <!-- ================= SIGN UP FORM ================= -->
+        <form id="signup-form"
+              class="auth-form{% if form == 'signup' %} active{% else %} hidden{% endif %}"
+              action="{{ url_for('signup') }}"
+              method="POST">
+              
+            <h2>Sign Up</h2>
+            <p class="guidelines">
+                Username (3–20 chars, no special chars, starts with alphanumeric).<br>
+                Password (≥8 chars, alphanumeric only, no spaces).
+            </p>
+
+            <div class="input-group">
+                <label for="signup-username">Username</label>
+                <input type="text" id="signup-username" name="reg_username" required>
+            </div>
+
+            <div class="input-group">
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-password" name="reg_password" required>
+            </div>
+
+            <button type="submit" class="submit-btn">Register</button>
+                {% if form == 'signup' and message %}
+                    <p id="signup-message" class="message" style="color: red; font-weight: bold;">
+                        {{ message }}
+                    </p>
+                {% endif %}
+        </form>
+    </div>
+
+    <!-- ================= JAVASCRIPT TOGGLE LOGIC ================= -->
+    <script>
+        const showSigninBtn = document.getElementById('show-signin');
+        const showSignupBtn = document.getElementById('show-signup');
+        const signinForm = document.getElementById('signin-form');
+        const signupForm = document.getElementById('signup-form');
+
+        showSigninBtn.addEventListener('click', function() {
+            signinForm.classList.add('active');
+            signinForm.classList.remove('hidden');
+            signupForm.classList.add('hidden');
+            signupForm.classList.remove('active');
+
+            showSigninBtn.classList.add('active');
+            showSignupBtn.classList.remove('active');
+        });
+
+        showSignupBtn.addEventListener('click', function() {
+            signupForm.classList.add('active');
+            signupForm.classList.remove('hidden');
+            signinForm.classList.add('hidden');
+            signinForm.classList.remove('active');
+
+            showSignupBtn.classList.add('active');
+            showSigninBtn.classList.remove('active');
+        });
+    </script>
+</body>
+</html>

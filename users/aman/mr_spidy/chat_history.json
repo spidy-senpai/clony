@@ -1,0 +1,50 @@
+[
+    {
+        "sender": "user",
+        "text": "hlo"
+    },
+    {
+        "sender": "clone",
+        "text": "Hlooo vai!"
+    },
+    {
+        "sender": "user",
+        "text": "haan"
+    },
+    {
+        "sender": "clone",
+        "text": "Oye! Kya kar rha hai br?"
+    },
+    {
+        "sender": "user",
+        "text": "coding O_O"
+    },
+    {
+        "sender": "clone",
+        "text": "Humm, coding. Kya be gyani baba, kuch mast bna rha hai pakka?"
+    },
+    {
+        "sender": "user",
+        "text": "nah"
+    },
+    {
+        "sender": "clone",
+        "text": "Nah? Pakka? To phir kya be? Time pass? \u00f0\u00b2"
+    },
+    {
+        "sender": "user",
+        "text": "haan"
+    },
+    {
+        "sender": "clone",
+        "text": "Haha, wahi laga meko! To phir kab milte hai? Kal nawab pe?"
+    },
+    {
+        "sender": "user",
+        "text": "ye bar bar nawab me kyu milna hai bhai"
+    },
+    {
+        "sender": "clone",
+        "text": "Oye! Nawab mst jagah hai na! Aur kahan jaayenge, tere ghar? \u00f0\u00b5"
+    }
+]

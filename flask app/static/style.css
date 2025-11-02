@@ -1,0 +1,187 @@
+/* =========================================================
+   ⚡ LOGIN SYSTEM — REWRITTEN CSS (CLEAN, BALANCED, MODERN)
+   ========================================================= */
+
+/* ---------- GLOBAL RESET ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* ---------- PAGE BACKGROUND ---------- */
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ---------- CONTAINER ---------- */
+.container {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(8px);
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* ---------- FORM TOGGLE BUTTONS ---------- */
+.form-toggle {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.form-toggle button {
+    flex: 1;
+    padding: 0.75rem 0;
+    border: none;
+    background: transparent;
+    color: #444;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.form-toggle button.active {
+    color: #6b46c1;
+    border-color: #6b46c1;
+}
+
+.form-toggle button:hover {
+    color: #5a67d8;
+}
+
+/* ---------- AUTH FORMS ---------- */
+.auth-form {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.auth-form.active {
+    display: block;
+}
+
+.auth-form.hidden {
+    display: none;
+}
+
+.auth-form h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.guidelines {
+    font-size: 0.85rem;
+    color: #777;
+    margin-bottom: 1.25rem;
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* ---------- INPUT GROUPS ---------- */
+.input-group {
+    margin-bottom: 1.25rem;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.9rem;
+    color: #444;
+    margin-bottom: 0.3rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border-radius: 0.5rem;
+    border: 1.5px solid #bbb !important;
+    font-size: 1rem;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #111 !important;
+    box-shadow: 0 0 0 2px #1112;
+}
+
+/* ---------- SUBMIT BUTTON ---------- */
+.submit-btn, .send-btn, .create-clone-btn {
+    width: 100%;
+    background: #111 !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 0.6rem !important;
+    font-weight: 600 !important;
+    padding: 0.75rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.submit-btn:hover, .send-btn:hover, .create-clone-btn:hover {
+    background: #333 !important;
+    color: #fff !important;
+    transform: translateY(-1px) scale(1.03);
+}
+
+/* ---------- MESSAGE STYLES (NOW HIDDEN) ---------- */
+.message,
+#signin-message,
+#signup-message {
+    visibility: visible;
+    height: auto;
+    margin: 1rem 0;
+    padding: 0.5rem;
+    overflow: visible;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- RESPONSIVE DESIGN ---------- */
+@media (max-width: 480px) {
+    .container {
+        padding: 2rem 1.5rem;
+    }
+
+    .form-toggle button {
+        font-size: 0.9rem;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background: #f0f0f0;
+}
+::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 4px;
+}
+
+@media (max-width: 900px) {
+    .container, .chat-container, .main-content {
+        border-radius: 0.7rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+}
+
+/* --- END PROFESSIONAL LIGHT THEME OVERRIDE --- */

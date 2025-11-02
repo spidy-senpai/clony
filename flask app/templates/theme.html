@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Theme</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+    body.dark-theme { background: #181f2a; color: #e5e7eb; }
+    body.light-theme { background: #f7f7f9; color: #232946; }
+        .container { max-width: 420px; margin: 3rem auto; background: #232946; border-radius: 1.2rem; padding: 2.5rem 2rem; box-shadow: 0 4px 24px #23294644; }
+        h2 { color: #6366f1; margin-bottom: 1.5rem; }
+        .theme-toggle { display: flex; align-items: center; gap: 1.2rem; margin-top: 2rem; }
+        .toggle-btn { width: 60px; height: 32px; background: #6366f1; border-radius: 16px; position: relative; cursor: pointer; transition: background 0.2s; }
+        .toggle-btn .circle { width: 28px; height: 28px; background: #fff; border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: left 0.2s; }
+        .toggle-btn.active { background: #232946; }
+        .toggle-btn.active .circle { left: 30px; background: #6366f1; }
+        .label { font-size: 1.1rem; color: #a0aec0; }
+    </style>
+</head>
+<body>
+    <script>
+        // Set theme class on body
+        document.addEventListener('DOMContentLoaded', function() {
+            var theme = '{{ theme }}';
+            document.body.classList.remove('dark-theme', 'light-theme');
+            document.body.classList.add(theme === 'light' ? 'light-theme' : 'dark-theme');
+        });
+    </script>
+    <div class="container">
+        <h2>Theme</h2>
+        <div class="theme-toggle">
+            <div class="label">{{ 'Light' if theme == 'light' else 'Dark' }} Mode</div>
+            <div class="toggle-btn{% if theme == 'light' %} active{% endif %}" id="toggleBtn" onclick="toggleTheme()">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleTheme() {
+            fetch('/toggle_theme', {method: 'POST'})
+                .then(() => window.location.reload());
+        }
+    </script>
+</body>
+</html>

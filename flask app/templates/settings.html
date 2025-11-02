@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+    body {
+        min-height: 100vh;
+        background: #181f2a;
+        color: #e5e7eb;
+        font-family: 'Poppins', sans-serif;
+    }
+    .container {
+        max-width: 420px;
+        margin: 3rem auto;
+        background: #232946;
+        border-radius: 1.2rem;
+        padding: 2.5rem 2rem;
+        box-shadow: 0 4px 24px #23294644;
+    }
+    h2 {
+        color: #6366f1;
+        margin-bottom: 1.5rem;
+    }
+    label {
+        display: block;
+        margin: 1.2rem 0 0.3rem 0;
+        font-weight: 500;
+        color: #e5e7eb;
+    }
+    input[type=text], input[type=password] {
+        width: 100%;
+        padding: 0.7rem;
+        border-radius: 0.5rem;
+        border: 1.5px solid #6366f1;
+        background: #181f2a;
+        color: #e5e7eb;
+        margin-bottom: 1rem;
+    }
+    button {
+        background: #6366f1;
+        color: #fff;
+        border: none;
+        padding: 0.8rem 2rem;
+        border-radius: 0.6rem;
+        font-weight: 600;
+        margin-top: 1.2rem;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+    button:hover {
+        background: #232946;
+        color: #fff;
+    }
+    .danger {
+        color: #ef4444;
+        margin-top: 2rem;
+        text-align: center;
+    }
+    .hidden { display: none; }
+    .guideline { color: #a0aec0; font-size: 0.98rem; margin-bottom: 0.7rem; }
+    .result-message { margin: 1rem 0 0.5rem 0; font-weight: 500; text-align: center; }
+    .result-success { color: #22c55e; }
+    .result-fail { color: #ef4444; }
+    </style>
+</head>
+<body>
+    <script>
+        // Set theme class on body
+        document.addEventListener('DOMContentLoaded', function() {
+            var theme = '{{ theme }}';
+            document.body.classList.remove('dark-theme', 'light-theme');
+            document.body.classList.add(theme === 'light' ? 'light-theme' : 'dark-theme');
+        });
+    </script>
+    <div class="container">
+        <h2>Settings</h2>
+        <div id="resultMessage" class="result-message {% if result_message %}{% if result_success %}result-success{% else %}result-fail{% endif %}{% else %}hidden{% endif %}">
+            {{ result_message }}
+        </div>
+        <button type="button" onclick="toggleForm('usernameForm')">Change Username</button>
+        <form id="usernameForm" class="hidden" method="post" action="#">
+            <div class="guideline">Username must be 3-20 characters, only letters, numbers, underscores.</div>
+            <label for="old_username">Old Username</label>
+            <input type="text" id="old_username" name="old_username" placeholder="Current username" required>
+            <label for="new_username">New Username</label>
+            <input type="text" id="new_username" name="new_username" placeholder="New username" required>
+            <button type="submit">Update Username</button>
+        </form>
+        <button type="button" onclick="toggleForm('passwordForm')">Change Password</button>
+        <form id="passwordForm" class="hidden" method="post" action="#">
+            <div class="guideline">Password must be 8-32 characters, include a number and a letter.</div>
+            <label for="old_password">Old Password</label>
+            <input type="password" id="old_password" name="old_password" placeholder="Current password" required>
+            <label for="new_password">New Password</label>
+            <input type="password" id="new_password" name="new_password" placeholder="New password" required>
+            <button type="submit">Update Password</button>
+        </form>
+        <form method="post" action="#">
+            <button type="submit" style="background:#ff6b6b; margin-top:2rem;">Delete Account</button>
+        </form>
+        <form method="get" action="{{ url_for('logout') }}">
+            <button type="submit" style="background:#232946; color:#fff; margin-top:1.2rem;">Logout</button>
+        </form>
+        <div class="danger">* These actions are permanent. Proceed with caution.</div>
+    </div>
+    <script>
+        function toggleForm(formId) {
+            var form = document.getElementById(formId);
+            form.classList.toggle('hidden');
+        }
+        // Example: Show result message (call this after backend response)
+        function showResult(success, message) {
+            var msg = document.getElementById('resultMessage');
+            msg.classList.remove('hidden', 'result-success', 'result-fail');
+            msg.textContent = message;
+            msg.classList.add(success ? 'result-success' : 'result-fail');
+        }
+        // TODO: Connect forms to backend and call showResult() on response
+    </script>
+</body>
+</html>
